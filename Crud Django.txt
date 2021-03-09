@@ -1,0 +1,57 @@
+Virtual env
+	virtualenv venv
+	cd venv
+	venv\Scripts\activate
+
+Instalar o Django
+	pip install django
+	django-admin startproject crudadmin
+	cd crudadmin
+	
+Subir o Projeto
+	python manage.py runserver
+
+Gerar a base de dados
+	python manage.py migrate
+
+Criar o usuário
+	python manage.py creatsuperuser
+
+Mudar a ligua
+	crudadmin->settings.py
+	LANGUAGE_CODE = 'pt-br'
+
+Criar a aplicação
+	django-admin startapp crud
+
+Instalar a aplicação
+	crudadmin->settings.py
+	INSTALLED_APPS 'crud',
+
+Criar modelo
+	crudadmin->migrations->models.py
+	class Pessoa(Model.models):
+		nome = models.CharField(max_length = 100)
+		data_nascimento = models.IntegerField()
+		telefone = models.CharField(max_length = 16)
+		cpf = models.CharField(max_length = 14)
+		RG = models.CharField(max_length = 9)
+		endereco = models.CharField(max_length = 200)
+		complemento = models.TextField(max_length = 200, black = True, null = True)
+		cep = models.CharField(max_length = 11)
+		email = models.CharField(max_length = 100)
+		esta_negativado = models.BooleanField()
+
+	de __str__(self):
+		return self.nome
+
+Criar a tabela no BD
+	python manage.py makemigrations
+
+Executar o arquivo de migração
+	python manage.py migrate
+
+Configurar o painel admin
+	migrations->admin.py
+	from crud.models import Pessoa
+	admin.site.register(Pessoa)
